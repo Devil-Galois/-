@@ -1,7 +1,7 @@
 #define true  1
 #define false 0
 
-typedef int DataType;
+typedef char DataType;
 
 typedef int bool;
 
@@ -11,19 +11,11 @@ typedef struct BiTNode
     struct BiTNode * lchild,*rchild;
 }BiTNode ,*BiTree;
 
-typedef enum order
-{
-    PreOrder = 10, InOrder = 20, PostOrder = 30
-}Order;
 
 //函数
 
-//初始化一个带头二叉树
-void InitBiTree(BiTree* pRoot);
-
-//根据已有数据按指定遍历顺序建立一个树
-void CreateBiTree(BiTree* pRoot, DataType* array,Order oder);
-
+//建立一个树
+BiTree PreOrderCreateBiTree(DataType* *array);
 //递归前序遍历二叉树
 void PreOrderTraverse_Recursion(BiTree* pRoot);
 //递归中序遍历二叉树
@@ -39,11 +31,31 @@ void InOrderTraverse(BiTree* pRoot);
 void PostOrderTraverse(BiTree* pRoot);
 
 //后序销毁一棵二叉树并释放所有空间
-void DestroyBiTree(BiTree* pRoot);
+BiTree DestroyBiTree(BiTree* pRoot);
 
 //对二叉树进行指定操作的函数
-void Operation();
+void Operation(BiTree p);
 
 
 
 
+//栈的实现部分
+typedef struct Stack
+{
+    BiTree data;
+    struct S_Node* next;
+}S_top,*Stack;
+
+//函数
+//压栈
+void Push(BiTree p, Stack pS);
+//出栈
+BiTree Pop(Stack pS);
+//初始化空栈
+Stack InitStack();
+//检查空栈
+bool IsEmpty(Stack pS);
+//获取栈顶元素
+BiTree GetTop(Stack pS);
+//销毁栈
+void DestroyStack(Stack pS);
